@@ -6,8 +6,7 @@ import org.junit.Test;
 import java.io.BufferedReader;
 import java.io.PrintStream;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 public class PlayerTest {
 
@@ -55,4 +54,37 @@ public class PlayerTest {
 
         verify(board).draw();
     }
+
+    @Test
+    public void shouldCheckTileOccupancyWhenPlayerSelectsIt() throws Exception {
+        player.takeTurn();
+
+        verify(board).tileOccupied(-1);
+    }
+
+    @Test
+    public void shouldMarkBoardWhenTileNotOccupied() throws Exception {
+        when(board.tileOccupied(-1)).thenReturn(false);
+
+        player.takeTurn();
+        verify(board).markTile(-1, playerMark);
+    }
+
+    @Test
+    public void shouldNotMarkBoardWhenTileOccupied() throws Exception {
+        when(board.tileOccupied(-1)).thenReturn(true);
+
+        player.takeTurn();
+        verify(board, never()).markTile(-1, playerMark);
+    }
+
+    @Test
+    public void shouldNotifyPlayerWhenTileOccupied() throws Exception {
+        when(board.tileOccupied(-1)).thenReturn(true);
+
+        player.takeTurn();
+        verify(printStream).println("Location already taken");
+    }
+
+
 }

@@ -26,8 +26,14 @@ public class Player {
 
         printStream.println();
 
-        board.markTile(tilePosition, this.playerMark);
-        board.draw();
+        if (!board.tileOccupied(tilePosition)){
+            board.markTile(tilePosition, this.playerMark);
+            board.draw();
+        }
+        else {
+            printStream.println("Location already taken");
+        }
+
     }
 
     private int tileToTilePosition(String playerTileChoice){

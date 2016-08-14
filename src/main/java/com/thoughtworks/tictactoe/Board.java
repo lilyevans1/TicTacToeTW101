@@ -28,4 +28,8 @@ public class Board {
     public void markTile(int tilePosition, String playerMark) {
         boardTiles.set(tilePosition, playerMark);
     }
+
+    public boolean tileOccupied(int i) {
+        return boardTiles.get(i).matches("[a-zA-Z]");
+    }
 }

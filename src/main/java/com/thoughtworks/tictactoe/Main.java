@@ -12,7 +12,8 @@ public class Main {
         List<String> boardTiles = Arrays.asList("1", "2", "3", "4", "5", "6", "7", "8", "9");
         Board board = new Board(printStream, boardTiles);
         Player player1 = new Player("1", "X", board, printStream, bufferedReader);
-        TicTacToe ticTacToe = new TicTacToe(board, player1);
+        Player player2 = new Player("2", "O", board, printStream, bufferedReader);
+        TicTacToe ticTacToe = new TicTacToe(board, player1, player2);
 
         ticTacToe.start();
     }
